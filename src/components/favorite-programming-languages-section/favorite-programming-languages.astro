@@ -1,0 +1,62 @@
+---
+import go_image from "./golang.400.400.50.webp";
+import rust_image from "./rust.400.400.50.webp";
+---
+
+<div id="favorite-programming-languages">
+   <h1 class="title">My favorite programming languages</h1>
+  <div class="languages">
+    <div class="language">
+      <img src={go_image} alt="Go programming language" />
+      <div class="text">
+        <h2>Go</h2>
+        <p>Go is cool.</p>
+      </div>
+    </div>
+    <div class="language">
+      <img src={rust_image} alt="Rust programming language" />
+      <div class="text">
+        <h2>Rust</h2>
+        <p>Rust is really cool.</p>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap");
+
+  #favorite-programming-languages {
+    padding: 5ch 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .-title {
+    font-family: "IM Fell English", serif;
+    font-size: 3rem;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  .languages {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: max-content;
+  }
+
+  .language {
+    background-color: lightgray;
+    padding: 1ch;
+    display: flex;
+    flex-direction: column;
+    min-width: 20ch;
+    max-width: 30ch;
+    width: auto;
+    border: 1px solid darkgray;
+  }
+
+</style>

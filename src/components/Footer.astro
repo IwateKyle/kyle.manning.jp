@@ -1,13 +1,22 @@
 ---
+import { SITE_TITLE } from "../consts";
+
 const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} YOUR NAME HERE. All rights reserved.
+	&copy; {today.getFullYear()} {SITE_TITLE}. All rights reserved.
 </footer>
 <style>
 	footer {
+		background-color: #222;
+		color: #bbb;
 		padding: 25px;
 		text-align: center;
+		/* position: fixed; */
+		bottom: 0;
+		right: 0;
+		left: 0;
+		margin-top: auto;
 	}
 </style>

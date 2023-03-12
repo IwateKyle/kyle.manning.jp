@@ -1,0 +1,16 @@
+---
+    const Layout = enum(['column', 'row']); 
+    const {title, subtitle} =  Astro.props;
+---
+
+<div class="hero">
+    <img src="" alt="">
+    <h2 class="title">{title}</h2>
+    <h3 class="subtitle">{subtitle}</h3>
+</div>
+
+<style>
+    .hero{
+        width: 100%;
+    }
+</style>

@@ -4,6 +4,8 @@ const blog = defineCollection({
 	// Type-check frontmatter using a schema
 	schema: z.object({
 		title: z.string(),
+		// section: z.enum(['kyle', 'programming', 'blender']).or(z.undefined()).optional(),
+		section: z.enum(['kyle', 'programming', 'blender']).optional(),
 		description: z.string(),
 		// Transform string to Date object
 		pubDate: z
@@ -18,4 +20,15 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const lists = defineCollection({
+	schema: z.object({
+		category: z.array(z.enum(['blender', 'rust', 'go', 'youtube-channel'])),
+		title: z.string(),
+		description: z.string().optional(),
+		url: z.string().url().optional(),
+		draft: z.boolean().default(true),
+		// draft: z.enum(['true', 'false']),
+	}),
+});
+
+export const collections = { blog, lists };
