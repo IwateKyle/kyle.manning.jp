@@ -38,17 +38,8 @@ width="200"
 <style>
   @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap");
   :root {
-    --column: 30px;
-    --gutter: 12px;
-    --margin: 140px;
-    --small-margin: calc(var(--margin) * 0.2);
-    --page-width: 1440px;
   }
 
-  /* .hero-section * {
-    border: 1px solid red;
-  }
- */
   .hero-section {
     color: #edc9a9;
     background-image: url("./sangobashi-min.large.90.webp");
@@ -56,14 +47,11 @@ width="200"
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-
     min-height: 80vh;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
     align-items: end;
-    /* z-index: -1; */
     margin: 0;
     padding: 0;
     left: 0;
@@ -71,24 +59,21 @@ width="200"
   }
 
   .container {
+    width: 100%;
+    max-width: var(--page-width);
     box-sizing: border-box;
     display: flex;
     height: auto;
-    justify-content: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: end;
     position: relative;
     overflow: hidden;
-    flex-basis: var(--page-width);
-    padding: 5% var(--margin);
-    /* border: 1px solid red; */
   }
 
   .text {
     max-width: 60ch;
-    min-width: 40ch;
+    min-width: 60ch;
     line-height: 0.9;
-    /* margin: 0; */
     align-self: start;
   }
 
@@ -106,59 +91,46 @@ width="200"
 
   img {
     transform: scaleX(-1);
-    min-width: 300px;
-    width: auto;
-    height: auto;
+    min-width: 450px;
     margin-bottom: -50%;
   }
 
-  @media only screen and (max-width: 1100px) {
-    
-    .hero-section img {
-    }
+  @media only screen and (max-width: 1000px) {
     .text {
-      /* width: 100%; */
-      min-width: none;
-      width: auto;
-      /* max-width: 100%; */
       z-index: 2;
+      width: 100%;
+      max-width: 80ch;
+      align-self: unset;
+    }
+    .title {
+      text-align: center;
     }
     .container {
       flex-direction: column;
       align-items: center;
+      width: 100%;
+      padding-left: var(--md-margin);
+      padding-right: var(--md-margin);
     }
     .hero-section img {
       width: 100%;
     }
   }
 
-  /* @media only screen and (max-width: 950px) {
-    .hero-section img {
-      position: absolute;
-    }
-    .hero-section .title {
-      font-size: 80px;
-    }
-    .hero-section .text {
-      position: relative;
-      margin-left: -25ch;
-    }
-  }  */
-
   @media only screen and (max-width: 630px) {
     .container {
       /* min-width: auto; */
-      padding-left: var(--small-margin);
-      padding-right: var(--small-margin);
+      padding-left: var(--sm-margin);
+      padding-right: var(--sm-margin);
     }
     .text {
       min-width: 0;
     }
   }
 
-  /* @media only screen and (max-width: 350px) {
-    .text {
-      min-width: 20px;
+  @media only screen and (max-width: 350px) {
+    .text .title {
+      font-size: 60px;
     }
-  } */
+  }
 </style>
