@@ -1,73 +1,92 @@
 ---
-// import sangobashiImage from "./sango-bashi.05.1920.1080.90.webp";
-// import sangobashiImage from "./sango-bashi.05.1920.1080.90.webp";
 import kyle_image from "./kyle.500.1025.50.webp";
 ---
 
+<!--
+media="(max-width: 400px)"
+width="200" 
+-->
 <section class="hero-section">
   <div class="container">
     <picture>
       <source
         srcset={kyle_image}
         media="(max-width: 400px)"
-        width="200"
-        height="auto"
+        width="100%"
+        height="100"
       />
       <img src={kyle_image} alt="Kyle Manning" />
     </picture> 
     <div class="text">
       <h1 class="title">Just a Simple Guy</h1>
-      <p>I'm a father and husband</p>
-      <p>I've lived in Japan nearly 20 years</p>
-      <p>I teach English to all ages</p>
-      <p>I love programming and web development</p>
-      <p>I love 3D graphic art</p>
-      <p>....oh, and ice cream, too!</p>
+      <p>
+        I'm a dad, a husband, a father, and a teacher.  I currently live in Japan and teach English to Japanese of all ages.  I especially like computers via programming, art, design, 3D graphics, and just keeping up to date with all the new technologies (..although it really is impossible to keep up with everything.  )  
+      </p>
+      <p>
+        My favorite programming languages are Rust and Golang.  My favorite 3D modeling tool is Blender. And how could I go without showing extreme gratitude to Linux.  Yes, I am a 100% Linux user and advocate.
+      </p>
+
     </div>
-  </div>
+  </div> 
 </section>
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap");
-
-  .hero-section * {
-    /* border: 1px solid red; */
+  :root {
+    --column: 30px;
+    --gutter: 12px;
+    --margin: 140px;
+    --page-width: 1440px;
   }
 
+  /* .hero-section * {
+    border: 1px solid red;
+  }
+ */
   .hero-section {
     color: #edc9a9;
-    /* background-image: linear-gradient(to top left, hsl(246, 74%, 25%), #ffffff1c), */
     background-image: url("./sangobashi-min.large.90.webp");
-    /* url("./sango-bashi.05.1920.1080.90.webp"); */
     background-position: bottom left;
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
+    
     min-height: 80vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    z-index: -1;
+    align-items: end;
+    /* z-index: -1; */
     margin: 0;
     padding: 0;
     left: 0;
     overflow: hidden;
-    /* overflow-y: clip; */
   }
 
   .container {
+    box-sizing: border-box;
     display: flex;
-    /* flex-wrap: wrap; */
-    flex-wrap: wrap-reverse;
-    height: 100%;
+    flex-wrap: wrap;
+    height: auto;
     justify-content: center;
+    justify-content: space-between;
     align-items: end;
-    margin-bottom: -20ch;
     position: relative;
     overflow: hidden;
-    /* overflow-y: clip; */
+    flex-basis: var(--page-width);
+    padding: 5% var(--margin);
+    border: 1px solid red;
   }
+
+  .text {
+    max-width: 60ch;
+    min-width: 40ch;
+    line-height: .9;
+    margin: 0;
+    align-self: start;
+  }
+
   .title {
     font-family: "IM Fell English", serif;
     font-size: 96px;
@@ -75,24 +94,17 @@ import kyle_image from "./kyle.500.1025.50.webp";
     margin: 0;
   }
 
-  .text {
-    /* position: absolute; */
-    max-width: 40ch;
-    /* font-size: 32px; */
-    line-height: .9;
-    margin: 0;
-    /* right: 30%; */
-    align-self: start;
+  .text p {
+    line-height: 1.75;
+    font-size: large;
   }
 
   img {
-    /* position: relative; */
     transform: scaleX(-1);
-    max-height: 80vh;
+    min-width: 400px;
     width: auto;
     height: auto;
-    left: 30%;
-    top: 10%;
+    margin-bottom: -50%;
   }
 
   /* @media only screen and (max-width: 1100px) {
