@@ -12,22 +12,27 @@ width="200"
       <source
         srcset={kyle_image}
         media="(max-width: 400px)"
-        width="100%"
+        width="200"
         height="100"
       />
       <img src={kyle_image} alt="Kyle Manning" />
-    </picture> 
+    </picture>
     <div class="text">
       <h1 class="title">Just a Simple Guy</h1>
       <p>
-        I'm a dad, a husband, a father, and a teacher.  I currently live in Japan and teach English to Japanese of all ages.  I especially like computers via programming, art, design, 3D graphics, and just keeping up to date with all the new technologies (..although it really is impossible to keep up with everything.  )  
+        I'm a dad, a husband, a father, and a teacher. I currently live in Japan
+        and teach English to Japanese of all ages. I especially like computers
+        via programming, art, design, 3D graphics, and just keeping up to date
+        with all the new technologies (..although it really is impossible to
+        keep up with everything. )
       </p>
       <p>
-        My favorite programming languages are Rust and Golang.  My favorite 3D modeling tool is Blender. And how could I go without showing extreme gratitude to Linux.  Yes, I am a 100% Linux user and advocate.
+        My favorite programming languages are Rust and Golang. My favorite 3D
+        modeling tool is Blender. And how could I go without showing extreme
+        gratitude to Linux. Yes, I am a 100% Linux user and advocate.
       </p>
-
     </div>
-  </div> 
+  </div>
 </section>
 
 <style>
@@ -36,6 +41,7 @@ width="200"
     --column: 30px;
     --gutter: 12px;
     --margin: 140px;
+    --small-margin: calc(var(--margin) * 0.2);
     --page-width: 1440px;
   }
 
@@ -50,7 +56,7 @@ width="200"
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    
+
     min-height: 80vh;
     display: flex;
     flex-direction: row;
@@ -67,7 +73,6 @@ width="200"
   .container {
     box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
     height: auto;
     justify-content: center;
     justify-content: space-between;
@@ -76,14 +81,14 @@ width="200"
     overflow: hidden;
     flex-basis: var(--page-width);
     padding: 5% var(--margin);
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   .text {
     max-width: 60ch;
     min-width: 40ch;
-    line-height: .9;
-    margin: 0;
+    line-height: 0.9;
+    /* margin: 0; */
     align-self: start;
   }
 
@@ -101,27 +106,32 @@ width="200"
 
   img {
     transform: scaleX(-1);
-    min-width: 400px;
+    min-width: 300px;
     width: auto;
     height: auto;
     margin-bottom: -50%;
   }
 
-  /* @media only screen and (max-width: 1100px) {
+  @media only screen and (max-width: 1100px) {
+    
     .hero-section img {
-      max-height: 100ch;
-      margin-top: 10ch;
-    }
-    .title {
-      font-size: 60px;
     }
     .text {
-      width: 10px;
-      margin-bottom: 10ch;
-      width: 250px;
+      /* width: 100%; */
+      min-width: none;
+      width: auto;
+      /* max-width: 100%; */
+      z-index: 2;
+    }
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-section img {
+      width: 100%;
     }
   }
-*/
+
   /* @media only screen and (max-width: 950px) {
     .hero-section img {
       position: absolute;
@@ -137,20 +147,18 @@ width="200"
 
   @media only screen and (max-width: 630px) {
     .container {
-      flex-direction: column-reverse;
+      /* min-width: auto; */
+      padding-left: var(--small-margin);
+      padding-right: var(--small-margin);
     }
     .text {
-      margin-left: 3ch;
-      margin-top: 15%;
+      min-width: 0;
     }
   }
-  @media only screen and (max-width: 350px) {
-    .title {
-      font-size: 5ch;
+
+  /* @media only screen and (max-width: 350px) {
+    .text {
+      min-width: 20px;
     }
-    img {
-      width: 70%;
-      align-self: center;
-    }
-  }
+  } */
 </style>
