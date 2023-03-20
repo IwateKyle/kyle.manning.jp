@@ -10,28 +10,21 @@ const image = "some_image_file.png";
 import { getCollection } from "astro:content";
 import { render } from "astro/dist/runtime/server";
 
-const posts = await getCollection("blog", ({ data }) => {
-  return data.section == "kyle";
-}).then((posts) => {
-  return posts.sort(
-    (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-  );
-});
+const posts = await getCollection("blog");
+const published = posts.filter(post => post.data.draft == false)
+// const lists = await getCollection("lists", (list) => {
+//   if (import.meta.env.PROD) {
+//     return list.data.draft === false;
+//   } else return true;
+// });
 
+// const blender_list = lists.filter(item => {
+// 	return item.data.category.includes('rust');
+// });
 
-const lists = await getCollection("lists", (list) => {
-  if (import.meta.env.PROD) {
-    return list.data.draft === false;
-  } else return true;
-});
-
-const blender_list = lists.filter(item => {
-	return item.data.category.includes('rust');
-});
-
-if (lists === undefined) {
-  throw new Error("no lists");
-}
+// if (lists === undefined) {
+//   throw new Error("no lists");
+// }
 ---
 
 <!DOCTYPE html>
@@ -42,7 +35,7 @@ if (lists === undefined) {
   <body>
     <Header title={SITE_TITLE} />
     <HeroSection />
-    <!-- <BlogSection {posts} /> -->
+    <BlogSection {published} />
     <!-- <FavoriteProgrammingLanguages /> -->
     <!-- <main> -->
     <!-- <div class="lists">

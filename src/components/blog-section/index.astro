@@ -1,15 +1,15 @@
 ---
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
-import { getCollection } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 
-const { posts } = Astro.props;
+const {published}  = Astro.props;
 ---
 
 <section class="container">
   <ul>
     {
-      posts.map((post) => (
+      published.map((post) => (
         <li>
           <FormattedDate date={post.data.pubDate} />
           <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
