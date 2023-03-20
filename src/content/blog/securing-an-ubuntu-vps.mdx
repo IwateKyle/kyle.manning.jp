@@ -1,0 +1,200 @@
+---
+title: "Steps to Securing Your Ubuntu VPS"
+description: "Secure your Ubuntu VPS with these simple steps. You will reset your SSH port, ensure UFW is running and enabled, lock-it-down, allow 443 ssl encrypted connections through, create a non-root user, setup ssh-keys only login, and install fail2ban.  This should take you 15~30 minutes."
+section: "technology"
+pubDate: 03/30/2023
+---
+
+## Change SSH Port 
+
+```bash
+ vim /etc/ssh/sshd_config
+```
+
+Port 22 is the default port for SSH.  Hiding this port by changing it makes it just that much more difficult for the boogey many to try and come out from under your bed because he won't know where you are sleeping.  
+
+Find the entry labeled **port 22**. The port might be commented out as **#port 22**
+in either case, make sure entry is not commented out and change the port to the desired port.
+
+```bash
+port 1234
+```
+
+save the file
+
+```bash
+ systemctl restart sshd.service 
+ ```
+Log out
+
+Log back in.
+
+Try logging back in with the old port number to make sure access is blocked
+
+Try logging in with new port to make sure access as open
+
+## UFW Firewall
+UFW is a simple to configure firewall.  It is good enough for most small deployments.  Larger more complicated deployments may want to look into using iptables.  
+
+Lets ensure that UFW is running. Depending on your installation - it might already be running. On my VPS - it was already running, but you might see different results from provider to provider, installation to installation. The following command should indicate the current status.
+
+```bash 
+systemctl status ufw.service
+```
+
+Make sure you see *enabled* in the output.
+
+```bash
+Loaded: loaded (/lib/systemd/system/ufw.service; enabled; vendor preset: enabled)
+```
+The *enabled* output indicates that the service will start automatically upon reboot of the operating system. The service can be enabled with the enable command.
+
+```bash
+systemctl enable ufw.service
+```
+
+
+In the next line you want to see __active__ in the output
+
+```bash
+Active: active (exited) since Sun 2023-03-19 01:42:31 CET; 1 day 2h ago
+```
+
+The 'active' output indicates that the service is currently started and running. If the service is not started, from the terminal run:
+
+```bash
+systemctl start ufw.service
+```
+
+you may need to enable UFW independently of systemctl. Do so with: 
+
+```bash
+ufw enable
+```
+
+Choose (y) when prompted.
+
+## Restrict Port Access Using UFW Firewall
+
+Initially, remove all restrictions for *outgoing* traffic
+```bash
+ufw default allow outgoing
+```
+
+output
+
+```bash
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+```
+
+Restrict *all* incoming traffic by Default
+
+```bash
+ufw default deny incoming
+```
+
+output
+
+```bash
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+```
+
+Add 2222 or another port number that works for you to allowed incoming ports
+
+```bash
+ufw allow 2222
+```
+
+output
+
+```bash
+Rules updated
+Rules updated (v6)
+```
+
+## Add HTTPS to UFW Firewall
+This allows incoming traffic on port 443 and the equivalent IPv6 address.
+
+```bash
+ufw allow https
+```
+
+## Add a *non*-root user
+
+```bash
+adduser kyle
+```
+
+provide a password when prompted
+
+## Ensure Only the Newly Created User Can Login
+
+edit the same ssh file as before
+
+```bash
+vim /etc/ssh/sshd_config
+```
+
+find the entry for **PermitRootLogin** and change setting to be no as such:
+
+```bash
+PermitRootLogin no
+```
+
+## Copy SSH Keys to Server
+
+```bash
+ssh-copy-id -p <port-number> <user>@<server-address>
+```
+if you don't have any ssh keys created yet, you'll need to stop and generate some first. They should be place in ~/.ssh
+
+## Limit to SSH-Key Authentication Only
+
+```bash
+vim /etc/ssh/sshd_config
+```
+
+find entry for **PasswordAuthentication** and set to **no** as such
+```bash
+PasswordAuthentication no
+...
+systemctl restart sshd
+```
+
+## Install fail2ban
+fail2ban is a software service that prevents certain malicious attacks such monitoring when someone makes too many unsuccessful attempts to login within a certain period of time.  Learn more about [Fail2ban here](https://fail2ban.org).
+```bash
+apt install fail2ban -y
+systemctl start fail2ban
+systemctl enable fail2ban
+```
+
+## Add User to Sudoers
+the new user privileges will need to be elevated via access privileges of the sudo group.  After this step, we are pretty much going to prevent all access to using root.  
+
+```bash
+usermod -aG sudo <username>
+```
+When you need to execute a command that requires root privilege, just prefix the command with *sudo* as such.
+
+```bash
+sudo apt-get update
+```
+you will be prompted to re-enter your current user's password.  Then the command will be executed. 
+
+## Restrict *Root* From Shell Access
+edit the passwd file and change the root shell from /bin/bash to /usr/sbin/nologin
+
+before
+```bash
+root:x:0:0:root:/root:/bin/bash
+```
+after
+```bash
+root:x:0:0:root:/root:/usr/sbin/nologin
+```
+## Summary
+In a nutshell - you have restricted access of the root account - created a new user, then restricted that user to only using ssh keys for secure login.  UFW was configured to allow ssh access as well as 443 access.
+Beyond this point - you can use UFW to add incoming port access that your use case requires.
