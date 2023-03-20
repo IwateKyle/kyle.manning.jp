@@ -1,0 +1,7 @@
+## change ssh port from 22
+vim /etc/ssh/sshd_config
+find entry labeled as 
+port 22
+the port might be commented out as
+#port 22
+in either case, make sure entry is not commented out and change the port to the desired port.
