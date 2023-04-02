@@ -1,0 +1,8 @@
+---
+import Content from './index.svelte'
+import { load } from './data';
+
+const data = await load();
+---
+
+<Content {data} client:idle />
