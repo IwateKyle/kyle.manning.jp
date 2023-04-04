@@ -3,6 +3,8 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Noto+Sans+JP&display=swap");
 :root {
   --header-height: 70px;
   --column: 30px;
@@ -16,7 +18,6 @@ html {
   padding: 0;
   margin: 0;
 }
-@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Noto+Sans+JP&display=swap");
 
 body {
   line-height: 1.5;
