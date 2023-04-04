@@ -11,7 +11,7 @@ import { getCollection } from "astro:content";
 import { render } from "astro/dist/runtime/server";
 
 const posts = await getCollection("blog");
-const published = posts.filter(post => post.data.draft == false)
+const published = posts.filter((post) => post.data.draft == false);
 // const lists = await getCollection("lists", (list) => {
 //   if (import.meta.env.PROD) {
 //     return list.data.draft === false;
@@ -28,30 +28,16 @@ const published = posts.filter(post => post.data.draft == false)
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <BaseHead image={image} title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <meta charset="UTF-8" />
   </head>
   <body>
     <Header title={SITE_TITLE} />
     <HeroSection />
     <BlogSection {published} />
-    <!-- <FavoriteProgrammingLanguages /> -->
-    <!-- <main> -->
-    <!-- <div class="lists">
-      {
-        blender_list.map((item) => (
-          <>
-            <li>{item.data.title}</li>
-			{
-				item.render().then(({Content}) => {
-					return <Content /> ;
-				})
-			}
-          </>
-        ))
-      }
-    </div> -->
     <Footer />
   </body>
+
 </html>

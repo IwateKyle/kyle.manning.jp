@@ -3,16 +3,14 @@ import PocketBase from "pocketbase";
 export const load = async () => {
   let pb;
   let posts;
-  console.log("-------made it here---------");
   
   try {
     pb = new PocketBase("http://localhost:8090");
     posts = await pb.collection("posts").getList(1, undefined, {
-      // expand: "author",
-      // filter: 'slug = "about"'
+      filter: 'slug = "about"'
     });
   } catch (e) {
-    throw e;
+    
   }
 
   // fetch a paginated records list

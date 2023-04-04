@@ -1,8 +1,16 @@
 ---
-import Content from './index.svelte'
-import { load } from './data';
+import Content from "./index.svelte";
+import { load } from "./data";
+import { log } from "astro/dist/core/logger/core";
+import { SITE_TITLE } from "../../consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const data = await load();
+const lang = "ja";
+const description = data.document.description;
+const title = "this is the title";
 ---
 
-<Content {data} client:idle />
+<BaseLayout {title} {lang} {description}>
+  <Content {data} />
+</BaseLayout>
