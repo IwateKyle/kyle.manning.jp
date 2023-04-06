@@ -7,10 +7,11 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 // type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, lang } = Astro.props;
+let { title, description, pubDate, updatedDate, heroImage, lang } = Astro.props;
+lang ||="en";
 ---
 
-<html lang={Astro.props.lang}>
+<html lang={lang}>
 	<head>
 		<!-- <BaseHead {Astro.props} /> -->
 		<BaseHead {title} {description} {lang} />

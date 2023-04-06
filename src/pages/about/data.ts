@@ -5,12 +5,12 @@ export const load = async () => {
   let posts;
   
   try {
-    pb = new PocketBase("http://localhost:8090");
-    posts = await pb.collection("posts").getList(1, undefined, {
+    pb = new PocketBase("https://api.manning.jp");
+    posts = await pb.collection("posts").getList(1, 1, {
       filter: 'slug = "about"'
     });
   } catch (e) {
-    
+     
   }
 
   // fetch a paginated records list

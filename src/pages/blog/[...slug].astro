@@ -1,19 +1,27 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import PocketBase from "pocketbase";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../layouts/BlogPost.astro";
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+  const pb = new PocketBase("https://api.manning.jp");
+
+  const resultList = await pb.collection("get_posts").getList(1, 50);
+  const results = resultList.items.map((result) => {
+    const { id, updated, slug, title, body } = result;
+
+    return { params: { slug }, props: { id, updated, title, body } };
+  });
+
+  return results;
 }
-type Props = CollectionEntry<'blog'>;
-const post = Astro.props;
-const { Content } = await post.render();
+
+let { title, body, description, updated } = Astro.props;
+
+const site_title = `${title} <| Kyle Manning`;
+description ||= "my description";
 ---
 
-<BlogPost {...post.data}>
-	<p>{post.data.description}</p>
-	<Content />
+<BlogPost {title} {description} {updated}>
+  <!-- <h1>{title}</h1> -->
+  <Fragment set:html={body} />
 </BlogPost>

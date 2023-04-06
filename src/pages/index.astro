@@ -4,27 +4,27 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import HeroSection from "../components/hero-section/hero-section.astro";
-import FavoriteProgrammingLanguages from "../components/favorite-programming-languages-section/favorite-programming-languages.astro";
 import BlogSection from "../components/blog-section/index.astro";
 const image = "some_image_file.png";
-import { getCollection } from "astro:content";
-import { render } from "astro/dist/runtime/server";
+import PocketBase from 'pocketbase';
 
-const posts = await getCollection("blog");
-const published = posts.filter((post) => post.data.draft == false);
-// const lists = await getCollection("lists", (list) => {
-//   if (import.meta.env.PROD) {
-//     return list.data.draft === false;
-//   } else return true;
+const pb = new PocketBase('https://api.manning.jp');
+
+
+// fetch a paginated records list
+// filter: 'created >= "2022-01-01 00:00:00" && someField1 != someField2',
+const result_list = await pb.collection('get_posts').getList(1, 50);
+const published = result_list.items;
+
+// you can also fetch all records at once via getFullList
+// const records = await pb.collection('get_posts').getFullList({
+//     sort: '-created',
 // });
 
-// const blender_list = lists.filter(item => {
-// 	return item.data.category.includes('rust');
+// or fetch only the first record that matches the specified filter
+// const record = await pb.collection('get_posts').getFirstListItem('someField="test"', {
+//     expand: 'relField1,relField2.subRelField',
 // });
-
-// if (lists === undefined) {
-//   throw new Error("no lists");
-// }
 ---
 
 <!DOCTYPE html>

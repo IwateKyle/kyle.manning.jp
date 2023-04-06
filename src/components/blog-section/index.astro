@@ -3,7 +3,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { CollectionEntry, getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 
-const {published}  = Astro.props;
+const { published } = Astro.props;
 ---
 
 <section class="container">
@@ -11,8 +11,8 @@ const {published}  = Astro.props;
     {
       published.map((post) => (
         <li>
-          <FormattedDate date={post.data.pubDate} />
-          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          <FormattedDate date={new Date(post.updated)} />
+          <a href={`/blog/${post.slug}/`}>{post.title}</a>
         </li>
       ))
     }
