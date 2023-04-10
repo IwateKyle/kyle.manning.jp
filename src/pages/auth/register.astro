@@ -1,0 +1,11 @@
+---
+import Header from "../../components/Header.astro";
+import RegisterForm from "../../components/RegisterForm.svelte";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+---
+
+<BaseLayout>
+<Header/>
+<RegisterForm client:idle/>
+</BaseLayout>

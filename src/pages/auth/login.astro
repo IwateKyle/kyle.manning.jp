@@ -1,0 +1,11 @@
+---
+import Header from "../../components/Header.astro";
+import LoginForm from "../../components/LoginForm.svelte";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+---
+
+<BaseLayout>
+<Header/>
+<LoginForm client:idle/>
+</BaseLayout>

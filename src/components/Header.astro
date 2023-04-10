@@ -2,6 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
 import "../styles/global.css";
+import Authentication from "./Authentication.svelte";
 ---
 
 <header>
@@ -11,6 +12,7 @@ import "../styles/global.css";
 
   <div class="blur"></div>
   <nav> </nav>
+  <Authentication client:visible/>
 </header>
 
 <style>
